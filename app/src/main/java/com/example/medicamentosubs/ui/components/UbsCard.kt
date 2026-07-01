@@ -6,8 +6,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.medicamentosubs.model.UBS
+import com.example.medicamentosubs.ui.theme.AmareloGov
+import com.example.medicamentosubs.ui.theme.Preto
 
 @Composable
 fun UbsCard(
@@ -16,10 +19,9 @@ fun UbsCard(
 ) {
 
     Card(
-        shape = RoundedCornerShape(20.dp),
-
-        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp
-            ),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        elevation = CardDefaults.cardElevation(4.dp),
         modifier = Modifier.fillMaxWidth()
     ) {
 
@@ -29,19 +31,27 @@ fun UbsCard(
 
             Text(
                 text = ubs.nome,
-                style = MaterialTheme.typography.titleLarge
+                style = MaterialTheme.typography.titleMedium
             )
 
-            Text(ubs.endereco)
+            Text(
+                text = ubs.endereco,
+                style = MaterialTheme.typography.bodyMedium
+            )
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(10.dp))
 
-            Button(onClick = onClick) {
-                Text("Abrir")
+            Button(
+                onClick = onClick,
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(12.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = AmareloGov,
+                    contentColor = Preto
+                )
+            ) {
+                Text("Pesquisar")
             }
-
         }
-
     }
-
 }

@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.example.medicamentosubs.navigation.AppNavigation
-import com.example.medicamentosubs.ui.screens.HomeScreen
 import com.example.medicamentosubs.ui.theme.MedicamentosUBSTheme
 
 class MainActivity : ComponentActivity() {

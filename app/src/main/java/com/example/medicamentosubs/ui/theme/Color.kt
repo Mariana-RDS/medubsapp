@@ -21,3 +21,10 @@ val Fundo = Color(0xFFF5F7FA)
 val Card = Color.White
 
 val Vermelho = Color(0xFFC62828)
+
+val AzulGov = Color(0xFF0D47A1)
+val AzulClaro = Color(0xFF1976D2)
+val Branco = Color(0xFFFFFFFF)
+val Preto = Color(0xFF212121)
+val CinzaClaro = Color(0xFFF5F5F5)
+val AmareloGov = Color(0xFFFFD70D)

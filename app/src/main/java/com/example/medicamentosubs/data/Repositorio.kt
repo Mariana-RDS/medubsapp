@@ -32,7 +32,7 @@ object Repositorio{
         )
     )
 
-    val historico = listOf(
+    val historico = mutableListOf<Historico>(
 
         Historico(
             usuario = "Maria",
@@ -50,4 +50,8 @@ object Repositorio{
             data = "22/06/2026"
         )
     )
+
+    fun adicionarHistorico(item: Historico) {
+        historico.add(item)
+    }
 }

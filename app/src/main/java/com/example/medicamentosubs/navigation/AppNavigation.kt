@@ -20,8 +20,13 @@ fun AppNavigation() {
             HomeScreen(navController)
         }
 
-        composable("resultado") {
-            ResultadoScreen(navController)
+        composable("resultado/{medicamento}") { backStackEntry ->
+            val medicamento = backStackEntry.arguments?.getString("medicamento") ?: ""
+
+            ResultadoScreen(
+                navController = navController,
+                medicamento = medicamento
+            )
         }
 
         composable("detalhe") {
@@ -30,6 +35,10 @@ fun AppNavigation() {
 
         composable("historico") {
             HistoricoScreen(navController)
+        }
+
+        composable("mapa") {
+            MapaScreen(navController)
         }
 
     }

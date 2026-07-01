@@ -9,49 +9,80 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.medicamentosubs.data.Repositorio
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Surface
+import androidx.compose.ui.graphics.Color
+import com.example.medicamentosubs.MainLayout
+import com.example.medicamentosubs.ui.theme.Branco
+import com.example.medicamentosubs.ui.theme.Preto
 
 @Composable
-fun HistoricoScreen(
-    navController: NavController
-) {
+fun HistoricoScreen(navController: NavController) {
 
-    LazyColumn(
-        modifier = Modifier.padding(16.dp)
-    ) {
+    MainLayout(title = "Histórico",
+        navController = navController) {
 
-        items(Repositorio.historico) { item ->
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
 
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 10.dp)
-            ) {
+            items(Repositorio.historico) { item ->
 
-                Column(
-                    modifier = Modifier.padding(16.dp)
+                Card(
+                    shape = RoundedCornerShape(16.dp),
+                    colors = CardDefaults.cardColors(containerColor = Branco),
+                    elevation = CardDefaults.cardElevation(4.dp)
                 ) {
 
-                    Text(item.usuario)
+                    Column(
+                        modifier = Modifier.padding(16.dp)
+                    ) {
 
-                    Text(item.data)
+                        Text(
+                            text = item.usuario,
+                            color = Preto,
+                            style = MaterialTheme.typography.titleMedium
+                        )
 
-                    Text(item.medicamento)
+                        Text(
+                            text = item.data,
+                            color = Preto,
+                            style = MaterialTheme.typography.titleMedium
+                        )
 
-                    Text(item.ubs)
+                        Spacer(modifier = Modifier.height(6.dp))
 
-                    Text(
-                        if (item.encontrou)
-                            "✅ Encontrou"
-                        else
-                            "❌ Não encontrou"
-                    )
+                        Text("Medicamento: ${item.medicamento}")
+                        Text("UBS: ${item.ubs}")
 
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        Surface(
+                            color = if (item.encontrou)
+                                Color(0xFFE8F5E9)
+                            else
+                                Color(0xFFFFEBEE),
+                            shape = RoundedCornerShape(12.dp)
+                        ) {
+                            Text(
+                                text = if (item.encontrou)
+                                    "Disponível"
+                                else
+                                    "Indisponível",
+                                color = if (item.encontrou)
+                                    Color(0xFF2E7D32)
+                                else
+                                    Color(0xFFC62828),
+                                modifier = Modifier.padding(10.dp)
+                            )
+                        }
+                    }
                 }
-
             }
-
         }
-
     }
-
 }
