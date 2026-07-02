@@ -11,6 +11,8 @@ import androidx.navigation.NavController
 import com.example.medicamentosubs.ui.theme.AzulGov
 import com.example.medicamentosubs.ui.theme.Branco
 import com.example.medicamentosubs.ui.theme.CinzaClaro
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -26,6 +28,22 @@ fun MainLayout(
                 title = {
                     Text(title)
                 },
+
+                actions = {
+
+                    TextButton(
+                        onClick = {
+                            Firebase.auth.signOut()
+
+                            navController.navigate("login") {
+                                popUpTo(0) { inclusive = true }
+                            }
+                        }
+                    ) {
+                        Text("Sair", color = Branco)
+                    }
+                },
+
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = AzulGov,
                     titleContentColor = Branco
@@ -78,5 +96,4 @@ fun MainLayout(
             content()
         }
     }
-
 }

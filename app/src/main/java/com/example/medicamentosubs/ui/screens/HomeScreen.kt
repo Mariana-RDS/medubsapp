@@ -8,10 +8,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.medicamentosubs.MainLayout
+import com.example.medicamentosubs.model.MainViewModel
 import com.example.medicamentosubs.ui.theme.*
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(navController: NavController, viewModel: MainViewModel) {
 
     var medicamento by remember { mutableStateOf("") }
 
