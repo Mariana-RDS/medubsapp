@@ -31,6 +31,7 @@ import com.example.medicamentosubs.ui.theme.Branco
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import com.example.medicamentosubs.ui.theme.AmareloGov
 import com.example.medicamentosubs.ui.theme.AzulClaro
 import com.example.medicamentosubs.ui.theme.AzulGov
@@ -80,26 +81,53 @@ fun RegisterScreen(navController: NavController) {
                 OutlinedTextField(
                     value = name,
                     onValueChange = { name = it },
-                    label = { Text("Nome completo") },
+                    label = { Text("Nome", color = Preto) },
                     singleLine = true,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedTextColor = Preto,
+                        unfocusedTextColor = Preto,
+                        focusedBorderColor = AzulGov,
+                        unfocusedBorderColor = Preto,
+                        cursorColor = Preto,
+                        focusedLabelColor = Preto,
+                        unfocusedLabelColor = Preto
+                    )
                 )
 
                 OutlinedTextField(
                     value = email,
                     onValueChange = { email = it },
-                    label = { Text("E-mail") },
+                    label = { Text("E-mail", color = Preto) },
                     singleLine = true,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedTextColor = Preto,
+                        unfocusedTextColor = Preto,
+                        focusedBorderColor = AzulGov,
+                        unfocusedBorderColor = Preto,
+                        cursorColor = Preto,
+                        focusedLabelColor = Preto,
+                        unfocusedLabelColor = Preto
+                    )
                 )
 
                 OutlinedTextField(
                     value = password,
                     onValueChange = { password = it },
-                    label = { Text("Senha") },
+                    label = { Text("Senha", color = Preto) },
                     singleLine = true,
                     visualTransformation = PasswordVisualTransformation(),
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedTextColor = Preto,
+                        unfocusedTextColor = Preto,
+                        focusedBorderColor = AzulGov,
+                        unfocusedBorderColor = Preto,
+                        cursorColor = Preto,
+                        focusedLabelColor = Preto,
+                        unfocusedLabelColor = Preto
+                    )
                 )
 
                 Button(
@@ -126,7 +154,7 @@ fun RegisterScreen(navController: NavController) {
 
                     },
                     modifier = Modifier.fillMaxWidth(),
-                    colors = ButtonDefaults.buttonColors(containerColor = AzulClaro)
+                    colors = ButtonDefaults.buttonColors(containerColor = AmareloGov)
                 ) {
                     Text("Cadastrar", color = Branco)
                 }
@@ -135,7 +163,7 @@ fun RegisterScreen(navController: NavController) {
                     onClick = { navController.popBackStack() },
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text("Já tenho conta")
+                    Text("Já tenho conta", color = AzulClaro)
                 }
             }
         }

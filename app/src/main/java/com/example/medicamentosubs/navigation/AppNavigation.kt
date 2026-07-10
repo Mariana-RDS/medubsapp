@@ -44,5 +44,24 @@ fun AppNavigation(viewModel: MainViewModel) {
         composable("mapa") {
             MapaScreen(navController)
         }
+
+        composable(
+            route = "detalhe/{ubs}/{medicamento}"
+        ) { backStackEntry ->
+
+            val ubs = backStackEntry.arguments?.getString("ubs") ?: ""
+            val medicamento = backStackEntry.arguments?.getString("medicamento") ?: ""
+
+            DetalheUBSScreen(
+                navController = navController,
+                nomeUBS = ubs,
+                medicamento = medicamento
+            )
+        }
+
+        composable("resultado/{medicamento}") { backStackEntry ->
+            val medicamento = backStackEntry.arguments?.getString("medicamento") ?: ""
+            ResultadoScreen(navController, medicamento)
+        }
     }
 }

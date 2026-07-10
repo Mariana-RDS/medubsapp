@@ -14,7 +14,9 @@ import com.example.medicamentosubs.model.Historico
 import com.example.medicamentosubs.ui.theme.*
 
 @Composable
-fun DetalheUBSScreen(navController: NavController) {
+fun DetalheUBSScreen(navController: NavController,
+                     nomeUBS: String,
+                     medicamento: String) {
 
     var mostrarDialog by remember { mutableStateOf(false) }
     var mensagemDialog by remember { mutableStateOf("") }
@@ -64,7 +66,7 @@ fun DetalheUBSScreen(navController: NavController) {
                 ) {
 
                     Text(
-                        text = "UBS Centro",
+                        text = nomeUBS,
                         style = MaterialTheme.typography.headlineSmall,
                         color = Preto
                     )
@@ -72,7 +74,7 @@ fun DetalheUBSScreen(navController: NavController) {
                     Spacer(modifier = Modifier.height(6.dp))
 
                     Text(
-                        text = "Medicamento: Dipirona",
+                        text = "Medicamento: $medicamento",
                         style = MaterialTheme.typography.bodyLarge,
                         color = Preto
                     )
@@ -110,7 +112,7 @@ fun DetalheUBSScreen(navController: NavController) {
                 shape = RoundedCornerShape(12.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = AmareloGov,
-                    contentColor = Preto
+                    contentColor = Branco
                 )
             ) {
                 Text("✖ Não encontrei")

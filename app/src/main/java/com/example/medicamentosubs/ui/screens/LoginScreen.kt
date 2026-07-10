@@ -14,6 +14,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -75,18 +76,36 @@ fun LoginScreen(navController: NavController) {
                 OutlinedTextField(
                     value = email,
                     onValueChange = { email = it },
-                    label = { Text("E-mail") },
+                    label = { Text("E-mail", color = Preto) },
                     singleLine = true,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedTextColor = Preto,
+                        unfocusedTextColor = Preto,
+                        focusedBorderColor = AzulGov,
+                        unfocusedBorderColor = Preto,
+                        cursorColor = Preto,
+                        focusedLabelColor = Preto,
+                        unfocusedLabelColor = Preto
+                    )
                 )
 
                 OutlinedTextField(
                     value = password,
                     onValueChange = { password = it },
-                    label = { Text("Senha") },
+                    label = { Text("Senha", color = Preto) },
                     singleLine = true,
                     visualTransformation = PasswordVisualTransformation(),
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedTextColor = Preto,
+                        unfocusedTextColor = Preto,
+                        focusedBorderColor = AzulGov,
+                        unfocusedBorderColor = Preto,
+                        cursorColor = Preto,
+                        focusedLabelColor = Preto,
+                        unfocusedLabelColor = Preto
+                    )
                 )
 
                 Button(
@@ -107,7 +126,7 @@ fun LoginScreen(navController: NavController) {
                         }
                     },
                     modifier = Modifier.fillMaxWidth(),
-                    colors = ButtonDefaults.buttonColors(containerColor = AzulGov)
+                    colors = ButtonDefaults.buttonColors(containerColor = AmareloGov)
                 ) {
                     Text("Entrar", color = Branco)
                 }
@@ -116,7 +135,7 @@ fun LoginScreen(navController: NavController) {
                     onClick = { navController.navigate("register") },
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text("Criar conta")
+                    Text("Criar conta", color = AzulClaro)
                 }
             }
         }

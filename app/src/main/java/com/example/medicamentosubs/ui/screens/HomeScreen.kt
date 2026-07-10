@@ -1,5 +1,6 @@
 package com.example.medicamentosubs.ui.screens
 
+import android.net.Uri
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -53,16 +54,16 @@ fun HomeScreen(navController: NavController, viewModel: MainViewModel) {
             Button(
                 onClick = {
                     if (podePesquisar) {
-                        navController.navigate("resultado/${medicamento.trim()}")
+                                navController.navigate("resultado/${Uri.encode(medicamento.trim())}")
                     }
                 },
                 enabled = podePesquisar,
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(12.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = AzulGov,
+                    containerColor = AmareloGov,
                     contentColor = Branco,
-                    disabledContainerColor = AzulClaro,
+                    disabledContainerColor = AmareloGov,
                     disabledContentColor = Branco
                 )
             ) {

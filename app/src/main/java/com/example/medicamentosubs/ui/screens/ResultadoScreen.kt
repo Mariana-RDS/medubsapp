@@ -1,5 +1,6 @@
 package com.example.medicamentosubs.ui.screens
 
+import android.net.Uri
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -11,6 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.medicamentosubs.MainLayout
 import com.example.medicamentosubs.data.Repositorio
+import com.example.medicamentosubs.ui.theme.AmareloGov
 import com.example.medicamentosubs.ui.theme.AzulGov
 import com.example.medicamentosubs.ui.theme.Branco
 import com.example.medicamentosubs.ui.theme.Preto
@@ -60,11 +62,14 @@ fun ResultadoScreen(
                         Spacer(modifier = Modifier.height(10.dp))
 
                         OutlinedButton(
-                            onClick = { navController.navigate("detalhe") },
+                            onClick = { navController.navigate(
+                                "detalhe/${Uri.encode(ubs.nome)}/${Uri.encode(medicamento)}"
+                            ) },
                             modifier = Modifier.fillMaxWidth(),
                             shape = RoundedCornerShape(12.dp),
+                            border = null,
                             colors = ButtonDefaults.outlinedButtonColors(
-                                containerColor = AzulGov,
+                                containerColor = AmareloGov,
                                 contentColor = Branco
                             )
                         ) {

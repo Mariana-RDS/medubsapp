@@ -33,51 +33,60 @@ fun HistoricoScreen(navController: NavController) {
             items(Repositorio.historico) { item ->
 
                 Card(
-                    shape = RoundedCornerShape(16.dp),
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(12.dp),
                     colors = CardDefaults.cardColors(containerColor = Branco),
-                    elevation = CardDefaults.cardElevation(4.dp)
+                    elevation = CardDefaults.cardElevation(2.dp)
                 ) {
 
                     Column(
-                        modifier = Modifier.padding(16.dp)
+                        modifier = Modifier.padding(12.dp),
+                        verticalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
 
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                text = item.usuario,
+                                color = Preto,
+                                style = MaterialTheme.typography.titleMedium
+                            )
+
+                            Text(
+                                text = item.data,
+                                color = Preto,
+                                style = MaterialTheme.typography.bodySmall
+                            )
+                        }
+
                         Text(
-                            text = item.usuario,
-                            color = Preto,
-                            style = MaterialTheme.typography.titleMedium
+                            text = "Medicamento: ${item.medicamento}",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = Preto
                         )
 
                         Text(
-                            text = item.data,
-                            color = Preto,
-                            style = MaterialTheme.typography.titleMedium
+                            text = "UBS: ${item.ubs}",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = Preto
                         )
-
-                        Spacer(modifier = Modifier.height(6.dp))
-
-                        Text("Medicamento: ${item.medicamento}")
-                        Text("UBS: ${item.ubs}")
-
-                        Spacer(modifier = Modifier.height(8.dp))
 
                         Surface(
                             color = if (item.encontrou)
                                 Color(0xFFE8F5E9)
                             else
                                 Color(0xFFFFEBEE),
-                            shape = RoundedCornerShape(12.dp)
+                            shape = RoundedCornerShape(8.dp)
                         ) {
                             Text(
-                                text = if (item.encontrou)
-                                    "Disponível"
-                                else
-                                    "Indisponível",
+                                text = if (item.encontrou) "Disponível" else "Indisponível",
                                 color = if (item.encontrou)
                                     Color(0xFF2E7D32)
                                 else
                                     Color(0xFFC62828),
-                                modifier = Modifier.padding(10.dp)
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
                             )
                         }
                     }
