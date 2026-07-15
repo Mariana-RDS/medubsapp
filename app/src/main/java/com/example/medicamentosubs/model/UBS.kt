@@ -2,12 +2,15 @@ package com.example.medicamentosubs.model
 
 data class UBS(
 
-    val nome:String="",
-    val latitude:Double=0.0,
+    val nome: String = "",
 
-    val longitude:Double=0.0,
+    val latitude: Double = 0.0,
 
-    val endereco:String="",
+    val longitude: Double = 0.0,
 
-    val medicamentos:List<String> = emptyList()
+    val endereco: String = "",
+
+    val bairro: String = "",
+
+    val medicamentos: List<String> = emptyList()
 )

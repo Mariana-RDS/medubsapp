@@ -63,5 +63,26 @@ fun AppNavigation(viewModel: MainViewModel) {
             val medicamento = backStackEntry.arguments?.getString("medicamento") ?: ""
             ResultadoScreen(navController, medicamento)
         }
+
+        composable(
+            route = "detalheMapa/{nome}/{endereco}/{bairro}/{latitude}/{longitude}"
+        ) { backStackEntry ->
+
+            val nome = backStackEntry.arguments?.getString("nome") ?: ""
+            val endereco = backStackEntry.arguments?.getString("endereco") ?: ""
+            val bairro = backStackEntry.arguments?.getString("bairro") ?: ""
+            val latitude = backStackEntry.arguments?.getString("latitude") ?: ""
+            val longitude = backStackEntry.arguments?.getString("longitude") ?: ""
+
+
+            DetalheMapaUBSScreen(
+                navController = navController,
+                nome = nome,
+                endereco = endereco,
+                bairro = bairro,
+                latitude = latitude,
+                longitude = longitude
+            )
+        }
     }
 }
