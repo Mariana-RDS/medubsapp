@@ -75,7 +75,8 @@ class UBSService {
 
                             latitude = lat,
 
-                            longitude = lng
+                            longitude = lng,
+                            cnes = it.cnes
 
                         )
 

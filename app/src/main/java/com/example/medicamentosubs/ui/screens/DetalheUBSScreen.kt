@@ -1,5 +1,6 @@
 package com.example.medicamentosubs.ui.screens
 
+
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -12,6 +13,10 @@ import com.example.medicamentosubs.MainLayout
 import com.example.medicamentosubs.data.Repositorio
 import com.example.medicamentosubs.model.Historico
 import com.example.medicamentosubs.ui.theme.*
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import com.google.firebase.auth.FirebaseAuth
 
 @Composable
 fun DetalheUBSScreen(navController: NavController,
@@ -21,15 +26,29 @@ fun DetalheUBSScreen(navController: NavController,
     var mostrarDialog by remember { mutableStateOf(false) }
     var mensagemDialog by remember { mutableStateOf("") }
 
+    fun dataAtual(): String {
+
+        val formato = SimpleDateFormat(
+            "dd/MM/yyyy HH:mm",
+            Locale.getDefault()
+        )
+
+        return formato.format(Date())
+    }
+
+
     fun registrar(encontrou: Boolean) {
+
+        val usuarioAtual = FirebaseAuth.getInstance().currentUser
 
         Repositorio.adicionarHistorico(
             Historico(
-                usuario = "Usuário",
-                medicamento = "Dipirona",
-                ubs = "UBS Centro",
+                usuario = usuarioAtual?.displayName
+                    ?: "Usuário",
+                medicamento = medicamento,
+                ubs = nomeUBS,
                 encontrou = encontrou,
-                data = "30/06/2026"
+                data = dataAtual()
             )
         )
 

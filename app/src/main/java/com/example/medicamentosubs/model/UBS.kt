@@ -12,5 +12,9 @@ data class UBS(
 
     val bairro: String = "",
 
-    val medicamentos: List<String> = emptyList()
+    val medicamentos: List<String> = emptyList(),
+
+    val possuiMedicamento: Boolean = false,
+
+    val cnes: String? = null
 )

@@ -48,6 +48,7 @@ fun HistoricoScreen(navController: NavController) {
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
+
                             Text(
                                 text = item.usuario,
                                 color = Preto,
@@ -55,7 +56,7 @@ fun HistoricoScreen(navController: NavController) {
                             )
 
                             Text(
-                                text = item.data,
+                                text = "${item.data}",
                                 color = Preto,
                                 style = MaterialTheme.typography.bodySmall
                             )
@@ -81,7 +82,10 @@ fun HistoricoScreen(navController: NavController) {
                             shape = RoundedCornerShape(8.dp)
                         ) {
                             Text(
-                                text = if (item.encontrou) "Disponível" else "Indisponível",
+                                text = if (item.encontrou)
+                                    "✅ Encontrado pelo usuário"
+                                else
+                                    "❌ Não encontrado",
                                 color = if (item.encontrou)
                                     Color(0xFF2E7D32)
                                 else

@@ -5,5 +5,6 @@ data class APIEstabelecimento(
     val latitude: String?,
     val longitude: String?,
     val logradouro: String?,
-    val bairro: String?
+    val bairro: String?,
+    val cnes: String?
 )
