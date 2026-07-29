@@ -1,6 +1,8 @@
 package com.example.medicamentosubs.db.fb
 
+import com.example.medicamentosubs.data.Repositorio
 import com.example.medicamentosubs.model.FBUser
+import com.example.medicamentosubs.model.Historico
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -31,6 +33,7 @@ class FBDatabase {
                 .addOnSuccessListener {
                     it.toObject(FBUser::class.java)?.let { user ->
                         listener?.onUserLoaded(user)
+                        loadHistorico()
                     }
                 }
         }
@@ -43,5 +46,24 @@ class FBDatabase {
     fun register(user: FBUser) {
         val uid = auth.currentUser!!.uid
         db.collection("users").document(uid).set(user)
+    }
+
+    fun loadHistorico() {
+
+        val uid = Firebase.auth.currentUser?.uid ?: return
+
+        db.collection("users")
+            .document(uid)
+            .collection("historico")
+            .get()
+            .addOnSuccessListener { result ->
+
+                Repositorio.historico.clear()
+
+                for (doc in result) {
+                    val item = doc.toObject(Historico::class.java)
+                    Repositorio.historico.add(item)
+                }
+            }
     }
 }
