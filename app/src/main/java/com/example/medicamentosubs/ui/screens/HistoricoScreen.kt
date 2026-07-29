@@ -12,13 +12,19 @@ import com.example.medicamentosubs.data.Repositorio
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.graphics.Color
 import com.example.medicamentosubs.MainLayout
+import com.example.medicamentosubs.db.fb.FBDatabase
 import com.example.medicamentosubs.ui.theme.Branco
 import com.example.medicamentosubs.ui.theme.Preto
 
 @Composable
 fun HistoricoScreen(navController: NavController) {
+
+    LaunchedEffect(Unit) {
+        FBDatabase().loadHistorico()
+    }
 
     MainLayout(title = "Histórico",
         navController = navController) {

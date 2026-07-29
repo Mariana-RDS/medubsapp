@@ -26,14 +26,15 @@ class FBDatabase {
                 return@addAuthStateListener
             }
 
-            val uid = auth.currentUser!!.uid
+            val uid = auth.currentUser?.uid ?: return@addAuthStateListener
 
             db.collection("users").document(uid)
                 .get()
                 .addOnSuccessListener {
                     it.toObject(FBUser::class.java)?.let { user ->
+                        //loadHistorico()
                         listener?.onUserLoaded(user)
-                        loadHistorico()
+
                     }
                 }
         }
@@ -44,7 +45,7 @@ class FBDatabase {
     }
 
     fun register(user: FBUser) {
-        val uid = auth.currentUser!!.uid
+        val uid = auth.currentUser?.uid ?: return
         db.collection("users").document(uid).set(user)
     }
 
