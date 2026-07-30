@@ -1,16 +1,14 @@
 package com.example.medicamentosubs.data
 
-
 import androidx.compose.runtime.mutableStateListOf
 import com.example.medicamentosubs.model.Historico
-import com.example.medicamentosubs.model.UBS
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 object Repositorio {
 
-    val historico = mutableStateListOf<Historico>()
+    var historico = mutableStateListOf<Historico>()
 
     fun adicionarHistorico(item: Historico) {
 
@@ -18,8 +16,6 @@ object Repositorio {
             ?: return
 
         Firebase.firestore
-            .collection("users")
-            .document(uid)
             .collection("historico")
             .add(item)
             .addOnSuccessListener {

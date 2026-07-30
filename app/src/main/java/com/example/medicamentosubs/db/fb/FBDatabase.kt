@@ -32,7 +32,7 @@ class FBDatabase {
                 .get()
                 .addOnSuccessListener {
                     it.toObject(FBUser::class.java)?.let { user ->
-                        //loadHistorico()
+                        loadHistorico()
                         listener?.onUserLoaded(user)
 
                     }
@@ -50,21 +50,20 @@ class FBDatabase {
     }
 
     fun loadHistorico() {
+        db.collection("historico")
+            .addSnapshotListener { snapshot, error ->
 
-        val uid = Firebase.auth.currentUser?.uid ?: return
+                if (error != null) return@addSnapshotListener
 
-        db.collection("users")
-            .document(uid)
-            .collection("historico")
-            .get()
-            .addOnSuccessListener { result ->
+                val lista = mutableListOf<Historico>()
+
+                snapshot?.documents?.forEach { doc ->
+                    val item = doc.toObject(Historico::class.java)
+                    item?.let { lista.add(it) }
+                }
 
                 Repositorio.historico.clear()
-
-                for (doc in result) {
-                    val item = doc.toObject(Historico::class.java)
-                    Repositorio.historico.add(item)
-                }
+                Repositorio.historico.addAll(lista)
             }
     }
 }
