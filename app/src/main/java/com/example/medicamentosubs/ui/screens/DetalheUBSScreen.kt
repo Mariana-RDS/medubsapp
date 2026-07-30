@@ -175,3 +175,29 @@ fun DetalheUBSScreen(navController: NavController,
         }
     }
 }
+
+fun registrarHistorico(
+    nomeUBS: String,
+    medicamento: String,
+    encontrou: Boolean
+) {
+
+    val usuarioAtual = FirebaseAuth.getInstance().currentUser
+
+    val formato = SimpleDateFormat(
+        "dd/MM/yyyy HH:mm",
+        Locale.getDefault()
+    )
+
+    val data = formato.format(Date())
+
+    Repositorio.adicionarHistorico(
+        Historico(
+            usuario = usuarioAtual?.displayName ?: "Usuário",
+            medicamento = medicamento,
+            ubs = nomeUBS,
+            encontrou = encontrou,
+            data = data
+        )
+    )
+}
