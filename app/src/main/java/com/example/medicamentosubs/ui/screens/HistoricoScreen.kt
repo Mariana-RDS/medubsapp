@@ -2,7 +2,6 @@ package com.example.medicamentosubs.ui.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -29,75 +28,102 @@ fun HistoricoScreen(navController: NavController) {
     MainLayout(title = "Histórico",
         navController = navController) {
 
+        val historicoAgrupado = Repositorio.historico.groupBy { it.ubs }
+
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
 
-            items(Repositorio.historico) { item ->
+            historicoAgrupado.forEach { (ubsNome, registros) ->
 
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(12.dp),
-                    colors = CardDefaults.cardColors(containerColor = Branco),
-                    elevation = CardDefaults.cardElevation(2.dp)
-                ) {
+                item {
 
-                    Column(
-                        modifier = Modifier.padding(12.dp),
-                        verticalArrangement = Arrangement.spacedBy(4.dp)
+                    Card(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(16.dp),
+                        colors = CardDefaults.cardColors(containerColor = Branco),
+                        elevation = CardDefaults.cardElevation(4.dp)
                     ) {
 
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
+                        Column(modifier = Modifier.padding(12.dp)) {
 
                             Text(
-                                text = item.usuario,
-                                color = Preto,
-                                style = MaterialTheme.typography.titleMedium
+                                text = ubsNome,
+                                style = MaterialTheme.typography.titleLarge,
+                                color = Preto
                             )
 
-                            Text(
-                                text = "${item.data}",
-                                color = Preto,
-                                style = MaterialTheme.typography.bodySmall
-                            )
-                        }
+                            Spacer(modifier = Modifier.height(6.dp))
 
-                        Text(
-                            text = "Medicamento: ${item.medicamento}",
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = Preto
-                        )
 
-                        Text(
-                            text = "UBS: ${item.ubs}",
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = Preto
-                        )
+                            Spacer(modifier = Modifier.height(12.dp))
 
-                        Surface(
-                            color = if (item.encontrou)
-                                Color(0xFFE8F5E9)
-                            else
-                                Color(0xFFFFEBEE),
-                            shape = RoundedCornerShape(8.dp)
-                        ) {
-                            Text(
-                                text = if (item.encontrou)
-                                    "✅ Encontrado pelo usuário"
-                                else
-                                    "❌ Não encontrado",
-                                color = if (item.encontrou)
-                                    Color(0xFF2E7D32)
-                                else
-                                    Color(0xFFC62828),
-                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
-                            )
+                            val medicamentosAgrupados = registros.groupBy { it.medicamento }
+
+                            medicamentosAgrupados.forEach { (medicamento, listaMed) ->
+
+                                val encontrados = listaMed.count { it.encontrou }
+                                val naoEncontrados = listaMed.count { !it.encontrou }
+
+                                Card(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(vertical = 4.dp),
+                                    shape = RoundedCornerShape(10.dp),
+                                    colors = CardDefaults.cardColors(containerColor = Color(0xFFF9F9F9)),
+                                    elevation = CardDefaults.cardElevation(1.dp)
+                                ) {
+
+                                    Row(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(10.dp),
+                                        horizontalArrangement = Arrangement.SpaceBetween
+                                    ) {
+
+                                        Column {
+
+                                            Text(
+                                                text = medicamento,
+                                                style = MaterialTheme.typography.bodyLarge,
+                                                color = Preto
+                                            )
+
+                                            Spacer(modifier = Modifier.height(4.dp))
+
+                                            Row(
+                                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                            ) {
+
+                                                Surface(
+                                                    color = Color(0xFFE8F5E9),
+                                                    shape = RoundedCornerShape(6.dp)
+                                                ) {
+                                                    Text(
+                                                        text = "$encontrados encontraram",
+                                                        color = Color(0xFF2E7D32),
+                                                        modifier = Modifier.padding(4.dp)
+                                                    )
+                                                }
+
+                                                Surface(
+                                                    color = Color(0xFFFFEBEE),
+                                                    shape = RoundedCornerShape(6.dp)
+                                                ) {
+                                                    Text(
+                                                        text = "$naoEncontrados não encontraram",
+                                                        color = Color(0xFFC62828),
+                                                        modifier = Modifier.padding(4.dp)
+                                                    )
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
